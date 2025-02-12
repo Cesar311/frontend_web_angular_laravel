@@ -6,6 +6,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
+import { AppLayout } from './layout/component/app.layout';
 
 
 export const routes: Routes = [
@@ -32,9 +33,16 @@ export const routes: Routes = [
 
     },
     {
-        path: 'admin',
+      path: 'admin',
+      component: AppLayout,
+      children: [
+        {
+        path: '',
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
 
     },
+      ]
+    },
+
 
 ];

@@ -14,6 +14,7 @@ export class UsuarioComponent {
 	usuarioService = inject(UsuarioService);
 
 	usuarios: any[] = [];
+  visible: boolean = false;
 
 	usuarioForm = new FormGroup({
 		name: new FormControl(''),
@@ -44,10 +45,15 @@ export class UsuarioComponent {
 				this.getUsuarios();
 
 				this.usuarioForm.reset();
+
+        this.visible = false;
 			},
 			(error) => {
 
 			}
 		);
 	}
+  mostrarDialog(){
+    this.visible = true;
+  }
 }
