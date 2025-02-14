@@ -1,21 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: false,
+    selector: 'app-login',
+    standalone: false,
 
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  loginForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl(''),
+
+    authService = inject(AuthService);
+    router = inject(Router)
+
+    loginForm = new FormGroup({
+        email: new FormControl(''),
+        password: new FormControl(''),
     });
 
-    funLogin(){
-      alert("Ingresando...")
+    funLogin() {
+        this.authService.login(this.loginForm.value).subscribe (
+            (resp: any) => {
+                console.log(resp)
+                this.router.navigate(["/admin/perfil"])
+            },
+            (error: any) => {
+                console.log(error)
+                alert("Error al autenticar")
+            }
+        );
     }
 
 }
