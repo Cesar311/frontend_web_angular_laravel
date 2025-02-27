@@ -21,9 +21,10 @@ export class LoginComponent {
     });
 
     funLogin() {
-        this.authService.login(this.loginForm.value).subscribe (
+        this.authService.login(this.loginForm.value).subscribe(
             (resp: any) => {
                 console.log(resp)
+                localStorage.setItem('access_token', resp.access_token)
                 this.router.navigate(["/admin/perfil"])
             },
             (error: any) => {
@@ -32,5 +33,4 @@ export class LoginComponent {
             }
         );
     }
-
 }

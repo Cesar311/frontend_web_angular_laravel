@@ -7,42 +7,44 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { AppLayout } from './layout/component/app.layout';
+import { authGuard } from './core/guards/auth.guard';
 
 
 export const routes: Routes = [
-    {
-        path: '',
-        children: [
-            {
-                path: '',
-                component: InicioComponent
-            },
-            {
-                path: 'contactos',
-                component: ContactosComponent
-            },
-            {
-                path: 'servicios',
-                component: ServiciosComponent
-            }
-        ]
-    },
-    {
-        path: 'auth',
-        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+	{
+		path: '',
+		children: [
+			{
+				path: '',
+				component: InicioComponent
+			},
+			{
+				path: 'contactos',
+				component: ContactosComponent
+			},
+			{
+				path: 'servicios',
+				component: ServiciosComponent
+			}
+		]
+	},
+	{
+		path: 'auth',
+		loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
 
-    },
-    {
-      path: 'admin',
-      component: AppLayout,
-      children: [
-        {
-        path: '',
-        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+	},
+	{
+		path: 'admin',
+		component: AppLayout,
+		children: [
+			{
+				path: '',
+				loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
 
-    },
-      ]
-    },
+			},
+		],
+    canActivate: [authGuard]
+	},
 
 
 ];

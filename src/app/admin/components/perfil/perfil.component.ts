@@ -1,30 +1,42 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-perfil',
-    standalone: false,
+  selector: 'app-perfil',
+  standalone: false,
 
-    templateUrl: './perfil.component.html',
-    styleUrl: './perfil.component.scss'
+  templateUrl: './perfil.component.html',
+  styleUrl: './perfil.component.scss'
 })
 export class PerfilComponent {
 
-    AuthService = inject(AuthService)
-    perfil:any  = {}
+  perfil: any = {}
 
-    constructor() {
-        this.funGetPerfil()
-    }
+  authService = inject(AuthService)
+  router = inject(Router)
 
-    funGetPerfil() {
-        this.AuthService.perfil().subscribe(
-            (resp) => {
-                this.perfil = resp;
-            },
-            (error) => {
-                alert("Error al recuperar el perfil")
-            },
-        )
-    }
+  constructor(){
+    this.funGetPerfil()
+  }
+
+  funGetPerfil(){
+    this.authService.perfil().subscribe(
+      (resp: any) => {
+        this.perfil = resp;
+      },
+      (error) => {
+        //alert("Error al recuperar el Perfil")
+      },
+    )
+  }
+
+  funSalir(){
+    this.authService.logout().subscribe(
+      (resp) => {
+        localStorage.removeItem('access_token');
+        this.router.navigate(['/auth/login'])
+      }
+    )
+  }
 }

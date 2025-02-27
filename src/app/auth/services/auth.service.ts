@@ -27,7 +27,7 @@ export class AuthService {
     }
 
     perfil(){
-        return this.http.get(this.urlBase + "/v1/auth/profile", {headers: {Authorization: 'Bearer 7|vEpIxANqI8jXlnjL8U2FB2kkzSz2q84iRk9oG84wf908db9d'}});
+        return this.http.get(this.urlBase + "/v1/auth/profile", {headers: {Authorization: 'Bearer 24|YUrr0Rb8879xScDMOgkWpKK5ayP92LcdefZOaEZG1111d6a0'}});
     }
 
     logout(){
