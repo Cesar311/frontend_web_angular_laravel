@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  urlBase = "http://127.0.0.1:8000/api"
+  urlBase = environment.apiUrl;
   http = inject (HttpClient);
 
   constructor(/*private http:HttpClient*/) { }
@@ -27,7 +28,7 @@ export class UsuarioService {
     return this.http.put(`${this.urlBase}/usuario/${id}`, datos);
   }
 
-  elimianr(id:number){
-    return this.http.delete(`${this.urlBase}/usuario+${id}`);
+  eliminar(id:number){
+    return this.http.delete(`${this.urlBase}/usuario/+${id}`);
   }
 }
