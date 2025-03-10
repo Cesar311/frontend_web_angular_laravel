@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 // import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CategoriaService {
 
@@ -13,23 +13,23 @@ export class CategoriaService {
 
     constructor() { }
 
-    listar(){
+    listar() {
         return this.http.get(`${this.urlBase}/categoria`);
-      }
+    }
 
-      guardar(datos:any){
+    guardar(datos: any) {
         return this.http.post(`${this.urlBase}/categoria`, datos);
-      }
+    }
 
-      mostrar(id:number){
+    mostrar(id: number) {
         return this.http.get(`${this.urlBase}/categoria/${id}`);
-      }
+    }
 
-      modificar(id:number, datos:any){
+    modificar(id: number, datos: any) {
         return this.http.put(`${this.urlBase}/categoria/${id}`, datos);
-      }
+    }
 
-      eliminar (id:number){
+    eliminar(id: number) {
         return this.http.delete(`${this.urlBase}/categoria/${id}`);
-      }
+    }
 }
